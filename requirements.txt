@@ -1,0 +1,4 @@
+numpy==1.26.2
+pillow==10.3.0
+onnxruntime==1.18.1
+azure-storage-blob==12.20.0

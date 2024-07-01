@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Recognition Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1 style="text-align:center; color:#FFFFFF;">Butterfly Identity Crisis!</h1>
+    <p style="text-align:center; color:#FFFFFF;">Unveil the mystery butterfly below..</p>
+    <br>
+    <div class="wrapper">
+        <div class="file-upload" id="uploadButton">
+            <input type="file" name="file" accept="image/*" onchange="uploadAndPredict(event)">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+    </div>
+    <div id="imageContainer" class="image-container" style="display: none;">
+        <img id="uploadedImage" class="full-image" src="" alt="Uploaded Image">
+    </div>
+    <div id="predictionResult" style="text-align: center; color: #FFFFFF;"></div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="resetPage()" class="btn">Reset</button>
+    </div>
+
+    <script>
+        function uploadAndPredict(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function() {
+                const image = document.getElementById('uploadedImage');
+                image.src = reader.result;
+                image.style.display = 'block';
+                document.getElementById('imageContainer').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('predictionResult').innerHTML = `<p>Error: ${data.error}</p>`;
+                } else {
+                    document.getElementById('uploadButton').style.display = 'none';
+                    document.getElementById('predictionResult').innerHTML = `
+                        <p>Prediction:</p>
+                        <h2>${data.prediction}</h2>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById('predictionResult').innerHTML = `<p>Error: ${error}</p>`;
+            });
+        }
+
+        function resetPage() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

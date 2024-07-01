@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #de25eb;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.wrapper .file-upload {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #de25eb 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.wrapper .file-upload input[type=file] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #de25eb;
+}
+
+.image-container {
+    width: 225px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FFFFFF;
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.full-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn {
+    background-color: #FFFFFF;
+    border: 2px solid #de25eb;
+    color: #de25eb;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #de25eb;
+    color: #FFFFFF;
+}
