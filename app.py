@@ -19,6 +19,11 @@ app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB limit
 connect_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 container_name = "butterfly-recognition"
 
+# Allowed filetypes
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
