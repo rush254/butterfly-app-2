@@ -4,7 +4,6 @@ import base64
 import numpy as np
 from io import BytesIO
 from werkzeug.utils import secure_filename
-from src.model_processing import *
 from src.azure_blob import *
 import requests
 import json
